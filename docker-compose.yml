@@ -14,7 +14,7 @@ services:
       - 5433:5433
 
   db-source:
-    image: postgres:12
+    image: postgres
     environment:
       POSTGRES_DB: ${POSTGRES_DB_SOURCE}
       POSTGRES_USER: ${POSTGRES_USER_SOURCE}
