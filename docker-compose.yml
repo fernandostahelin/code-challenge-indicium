@@ -2,8 +2,12 @@ services:
 
   db-analytics:
     image: postgres
-    restart: always
     shm_size: 128mb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER_ANALYTICS} -d ${POSTGRES_DB_ANALYTICS}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       POSTGRES_DB: ${POSTGRES_DB_ANALYTICS}
       POSTGRES_USER: ${POSTGRES_USER_ANALYTICS}
@@ -15,6 +19,12 @@ services:
 
   db-source:
     image: postgres
+    shm_size: 128mb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER_ANALYTICS} -d ${POSTGRES_DB_ANALYTICS}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       POSTGRES_DB: ${POSTGRES_DB_SOURCE}
       POSTGRES_USER: ${POSTGRES_USER_SOURCE}

@@ -1,11 +1,21 @@
 # code-challenge-indicium
-## Overview
 This project is a case for Indicium's code challenge.
 Author: [@fernandostahelin](https://github.com/fernandostahelin)
+
+Linkedin: https://www.linkedin.com/in/fernandostahelin/
+## Overview
+tools:
+- [uv](https://github.com/astral-sh/uv)
+- [Ruff](https://github.com/astral-sh/ruff)
+- [Docker](https://www.docker.com/)
+- [Postgres](https://www.postgresql.org/)
+- [Meltano](https://meltano.com/)
 
 I opted to use uv as the package manager for this project. It was the first time using it and I liked the simplicity of it.
 
 I also opted to use Ruff instead of Flake8 for linting. Like uv, it was the first experimenting with it. I choosed mostly because of good comments of the community saying how fast it was.
+
+I opted to use a docker compose file to run the databases. This way, I can easily run the project locally and also deploy it to the cloud if needed.
 
 ## Architecture
 ![Pipeline](./pictures/code_challange_indicium.png)
@@ -32,7 +42,7 @@ To use the psql CLI to query the source database, run the following command:
 ```bash
 docker exec -it code_challenge_indicium-db-source-1 psql -U $POSTGRES_USER_SOURCE $POSTGRES_DB_SOURCE   
 ```
-To query, the logic is the same. Just change the variables to match the analytics database, along with the container name.
+To query the analytics database, the logic is the same. Just change the variables to match the analytics database, along with the container name.
 
 ```bash
 docker exec -it code_challenge_indicium-db-analytics-1 psql -U $POSTGRES_USER_ANALYTICS $POSTGRES_DB_ANALYTICS
@@ -43,5 +53,5 @@ After connected, you can run queries using the `SELECT` statement. For example:
 SELECT * FROM orders;
 ```
 
-## Transformations  
+## Extr  
 
