@@ -1,4 +1,9 @@
 # code-challenge-indicium
+## Credentials
+
+The credentials for the databases are stored in the `.env` file.
+Create your own `.env` file by copying the `.env.example` file and filling in the values.
+Docker-compose will fetch the values from the `.env` file to configure the databases.
 ## Setup
 First, if you haven't already, install Docker.
 
