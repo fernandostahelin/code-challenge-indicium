@@ -1,3 +1,9 @@
+.meltano/
+.ruff_cache/
+.meltano
+db_analytics_data/
+dbdata/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

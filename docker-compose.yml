@@ -1,24 +1,26 @@
-# Use postgres/example user/password credentials
-version: '3.9'
-
 services:
 
-  db:
+  db-analytics:
     image: postgres
     restart: always
-    # set shared memory limit when using docker-compose
     shm_size: 128mb
-    # or set shared memory limit when deploy via swarm stack
-    #volumes:
-    #  - type: tmpfs
-    #    target: /dev/shm
-    #    tmpfs:
-    #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
-      POSTGRES_PASSWORD: code_challange
-
-  adminer:
-    image: adminer
-    restart: always
+      POSTGRES_DB: northwind_analytics
+      POSTGRES_USER: northwind_user_analytics
+      POSTGRES_PASSWORD: thewindisblowing_analytics
+    volumes:
+      - ./db_analytics_data:/var/lib/postgresql/data
     ports:
-      - 8080:8080
+      - 5433:5433
+
+  db-source:
+    image: postgres:12
+    environment:
+      POSTGRES_DB: northwind
+      POSTGRES_USER: northwind_user
+      POSTGRES_PASSWORD: thewindisblowing
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data
+      - ./data/northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
+    ports:
+      - 5432:5432
