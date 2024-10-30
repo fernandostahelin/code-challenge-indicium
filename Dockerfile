@@ -13,7 +13,7 @@ COPY . .
 RUN meltano install
 
 # Don't allow changes to containerized project files
-ENV MELTANO_PROJECT_READONLY 1
+ENV MELTANO_PROJECT_READONLY=1
 
 # Expose default port used by `meltano ui`
 EXPOSE 5000
