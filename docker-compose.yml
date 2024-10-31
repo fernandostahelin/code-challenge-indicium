@@ -1,10 +1,13 @@
 services:
-
   db-analytics:
     image: postgres
     shm_size: 128mb
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER_ANALYTICS} -d ${POSTGRES_DB_ANALYTICS}"]
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER_ANALYTICS} -d ${POSTGRES_DB_ANALYTICS}",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -13,7 +16,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER_ANALYTICS}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_ANALYTICS}
     volumes:
-      - ./db_analytics_data:/var/lib/postgresql/data
+      - ./db_analytics_data:/var/lib/postgresql/dat
     ports:
       - 5433:5433
 
@@ -21,7 +24,11 @@ services:
     image: postgres
     shm_size: 128mb
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER_ANALYTICS} -d ${POSTGRES_DB_ANALYTICS}"]
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER_ANALYTICS} -d ${POSTGRES_DB_ANALYTICS}",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5

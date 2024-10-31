@@ -1,18 +1,18 @@
 version: 1
 default_environment: dev
-project_id: 68ef5a9e-6296-4810-b175-8e924f2d64ea
+project_id: 927df17f-12cd-4661-9c7f-56ee0a215fab
 environments:
 - name: dev
 - name: staging
 - name: prod
 plugins:
   extractors:
-  - name: tap-csv
-    variant: meltanolabs
-    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
   - name: tap-postgres
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
+  - name: tap-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
   loaders:
   - name: target-postgres
     variant: meltanolabs
