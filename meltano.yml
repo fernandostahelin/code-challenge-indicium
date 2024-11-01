@@ -75,7 +75,6 @@ plugins:
   utilities:
   - name: airflow
     variant: apache
-    pip_url: apache-airflow==2.8.1
     config:
       core:
         dags_folder: orchestrate/dags
