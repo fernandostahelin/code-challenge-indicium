@@ -10,6 +10,7 @@ on:
 jobs:
 # FIRST JOB #######################################################################   
   build-test-image:
+    environment: docker_deploy
     name: Build Image for Testing
     runs-on: ubuntu-latest
 
