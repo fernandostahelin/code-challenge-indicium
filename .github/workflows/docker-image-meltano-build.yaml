@@ -44,7 +44,6 @@ jobs:
           cache-to: type=gha,mode=max
           platforms: linux/amd64
 
-# NEXT JOB #######################################################################   
   scan-image:
     name: Scan Image with Trivy
     needs: [build-test-image]
