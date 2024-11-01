@@ -73,17 +73,3 @@ plugins:
     extras:
     - numpy<2.0.0
     - pyarrow<15.0.0,>=14.0.1
-  - name: target-jsonl
-    variant: andyh1203
-    pip_url: target-jsonl
-  utilities:
-  - name: airflow
-    variant: apache
-    config:
-      core:
-        dags_folder: orchestrate/dags
-        plugins_folder: orchestrate/plugins
-
-
-
-

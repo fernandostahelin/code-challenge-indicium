@@ -4,7 +4,6 @@
 /venv
 /.env
 /ui.cfg
-/output
 
 # transform/.gitignore
 /transform/target/
