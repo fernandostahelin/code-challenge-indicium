@@ -18,7 +18,7 @@ services:
     volumes:
       - ./db_analytics_data:/var/lib/postgresql/dat
     ports:
-      - 5433:5433
+      - 5433:5432
 
   db-source:
     image: postgres

@@ -20,6 +20,37 @@ I opted to use a docker compose file to run the databases. This way, I can easil
 ## Architecture
 ![Pipeline](./pictures/code_challange_indicium.png)
 
+## Initial Setup
+Open your terminal and run the following command to clone the repo and install the dependencies:
+### 1 - clone the repo
+```bash
+git clone https://github.com/fernandostahelin/code-challenge-indicium.git
+```
+
+### 2 - install uv
+For macOS/Linux:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+For Windows:
+```powershell
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+### 3 - install dependencies
+```bash
+cd code-challenge-indicium
+uv venv
+uv sync
+```
+
+### 4 - activate the virtual environment
+```bash
+source .venv/bin/activate  # On Unix/macOS
+# or
+.venv\Scripts\activate  # On Windows
+```
 
 ## Credentials
 The credentials for the databases are stored in the `.env` file.
@@ -54,11 +85,7 @@ SELECT * FROM orders;
 ```
 
 You can also query the database using DBeaver.
-
-## Installing dependencies
-```bash
-uv install
-```
+Remember since we are running it locally, the host will be `localhost`
 
 ## running the EL process
 ```bash
