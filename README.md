@@ -53,5 +53,16 @@ After connected, you can run queries using the `SELECT` statement. For example:
 SELECT * FROM orders;
 ```
 
-## Extr  
+## running the EL process
+```bash
+meltano install
+meltano run tap-postgres target-postgres
+meltano run tap-csv target-postgres
+```
 
+## Executing airflow
+```bash
+meltano add utility airflow
+meltano invoke airflow:initialize
+meltano invoke airflow users create -u admin@localhost -p password --role Admin -e admin@localhost -f admin -l admin
+```
