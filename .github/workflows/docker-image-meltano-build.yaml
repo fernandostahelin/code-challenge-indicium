@@ -57,6 +57,7 @@ jobs:
 
   scan-image:
     name: Scan Image with Trivy
+    environment: docker_deploy
     needs: [build-test-image]
     runs-on: ubuntu-latest
 
@@ -111,6 +112,7 @@ jobs:
 # NEXT JOB #######################################################################   
   build-final-image:
     name: Build Final Image
+    environment: docker_deploy
     needs: [scan-image]
     runs-on: ubuntu-latest
 
