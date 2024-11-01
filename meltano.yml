@@ -18,24 +18,37 @@ plugins:
       password: ${TAP_POSTGRES_PASSWORD}
       database: ${TAP_POSTGRES_DATABASE}
       port: 5432
-      filter_schemas: ["public"]
+      filter_schemas: [public]
     select:
-      - "public-categories"
-      - "public-customer_customer_demo"
-      - "public-customer_demographics"
-      - "public-customers"
-      - "public-employees"
-      - "public-order_details"
-      - "public-orders"
-      - "public-products"
-      - "public-region"
-      - "public-shippers"
-      - "public-suppliers"
-      - "public-territories"
-      - "public-us_states"
+    - public-categories
+    - public-customer_customer_demo
+    - public-customer_demographics
+    - public-customers
+    - public-employees
+    - public-order_details
+    - public-orders
+    - public-products
+    - public-region
+    - public-shippers
+    - public-suppliers
+    - public-territories
+    - public-us_states
   - name: tap-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+    config:
+      files:
+      - entity: orders_details
+        keys: [order_id]
+        delimiter: ','
+        encoding: utf-8
+        path: ./data/
+        pattern: '*.csv'
+  - name: tap-parquet
+    variant: ae-nv
+    pip_url: git+https://github.com/AE-nv/tap-parquet.git
+    config:
+      filepath: ./data/**/2024-11-01/*.parquet
   loaders:
   - name: target-postgres
     variant: meltanolabs
@@ -46,28 +59,28 @@ plugins:
       user: ${TARGET_POSTGRES_USER}
       password: ${TARGET_POSTGRES_PASSWORD}
       database: ${TARGET_POSTGRES_DATABASE}
-  - name: target-csv
-    variant: meltanolabs
-    pip_url: git+https://github.com/MeltanoLabs/target-csv.git
-    config:
-      destination_path: "./output/csv"
-      overwrite_behavior: ''
   - name: target-parquet
     variant: automattic
     pip_url: git+https://github.com/Automattic/target-parquet.git
     config:
       add_record_metadata: true
-      destination_path: "./output"
+      destination_path: ./data
       load_method: upsert
+    extras:
+    - numpy<2.0.0
+    - pyarrow<15.0.0,>=14.0.1
   - name: target-jsonl
     variant: andyh1203
     pip_url: target-jsonl
-    config:
-      destination_path: "./output"
-      do_timestamp_file: true
   utilities:
   - name: airflow
     variant: apache
-    pip_url: git+https://github.com/meltano/airflow-ext.git@main apache-airflow==2.8.1
-      --constraint 
-      https://raw.githubusercontent.com/apache/airflow/constraints-2.8.1/constraints-no-providers-${MELTANO__PYTHON_VERSION}.txt
+    pip_url: apache-airflow==2.8.1
+    config:
+      core:
+        dags_folder: orchestrate/dags
+        plugins_folder: orchestrate/plugins
+
+
+
+
