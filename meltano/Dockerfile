@@ -5,7 +5,7 @@ FROM $MELTANO_IMAGE
 WORKDIR /project
 
 # Copy over Meltano project directory
-COPY ./meltano/* ./
+COPY . .
 RUN meltano install
 
 # Don't allow changes to containerized project files
