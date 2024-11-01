@@ -6,6 +6,8 @@ WORKDIR /project
 
 # Copy over Meltano project directory
 COPY . .
+RUN ls -la /project
+
 RUN meltano install
 
 # Don't allow changes to containerized project files
