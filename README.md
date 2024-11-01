@@ -23,39 +23,27 @@ Ideally, there would be a clear separation of concerns between orchestration and
 I tried my best to separate the concerns between orchestration and the EL process, using containers to run databases, meltano and airflow.
 
 ## Architecture
-![Pipeline](./pictures/code_challange_indicium.png)
+![Pipeline](./meltano/pictures/code_challange_indicium.png)
 
 ## Initial Setup
 Open your terminal and run the following command to clone the repo and install the dependencies:
 ### 1 - clone the repo
 ```bash
 git clone https://github.com/fernandostahelin/code-challenge-indicium.git
-```
-
-### 2 - install uv
-For macOS/Linux:
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-For Windows:
-```powershell
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
-
-### 3 - install dependencies
-```bash
 cd code-challenge-indicium
-uv venv
-uv sync
 ```
+### 2 - Run containers
+First, if you haven't already, install Docker.
 
-### 4 - activate the virtual environment
+Run the following command to start all the services:
 ```bash
-source .venv/bin/activate  # On Unix/macOS
-# or
-.venv\Scripts\activate  # On Windows
+docker compose up -d
 ```
+In this project, we're using Docker to run 2 postgres databases:
+- `db-source`: the source database, which contains the Northwind dataset.
+- `db-analytics`: the analytics database, which we will be storing the results of our transformations in.
+
+Also, airflow is running in the background, as well as meltano.
 
 ## Credentials
 The credentials for the databases are stored in the `.env` file.
@@ -64,17 +52,6 @@ Docker-compose will fetch the values from the `.env` file to configure the datab
 ```bash
 cp .env.example .env
 ```
-
-## Setup
-First, if you haven't already, install Docker.
-
-Then, run the following command to start the database containers:
-```bash
-docker compose up -d
-```
-In this project, we're using Docker to run 2 postgres databases:
-- `db-source`: the source database, which contains the Northwind dataset.
-- `db-analytics`: the analytics database, which we will be storing the results of our transformations in.
 
 ## Querying the databases
 
