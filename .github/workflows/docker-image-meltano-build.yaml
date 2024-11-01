@@ -17,8 +17,6 @@ jobs:
     permissions:
       packages: write # needed to push docker image to ghcr.io
 
-    
-
     steps:
 
       - name: Debug - List files
@@ -49,7 +47,7 @@ jobs:
       - name: Build and Push to GHCR
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./meltano
           file: ./meltano/Dockerfile
           push: true
           tags: ghcr.io/fernandostahelin/meltano:${{ github.run_id }}
@@ -159,7 +157,7 @@ jobs:
       - name: Docker Build and Push to GHCR and Docker Hub
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./meltano
           file: ./meltano/Dockerfile
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
