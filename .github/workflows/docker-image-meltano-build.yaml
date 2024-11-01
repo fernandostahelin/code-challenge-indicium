@@ -21,6 +21,10 @@ jobs:
 
     steps:
 
+      - name: Debug - List files
+        run: |
+          pwd
+          ls -la
 
       - name: Checkout git repo
         uses: actions/checkout@v4
