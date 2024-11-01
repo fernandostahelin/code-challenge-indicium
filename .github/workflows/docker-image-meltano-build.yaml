@@ -31,7 +31,6 @@ jobs:
       - name: Login to ghcr.io registry
         uses: docker/login-action@v3
         with:
-          file: ./meltano/Dockerfile
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
@@ -153,7 +152,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./meltano/Dockerfile
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
