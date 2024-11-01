@@ -53,6 +53,13 @@ After connected, you can run queries using the `SELECT` statement. For example:
 SELECT * FROM orders;
 ```
 
+You can also query the database using DBeaver.
+
+## Installing dependencies
+```bash
+uv install
+```
+
 ## running the EL process
 ```bash
 meltano install
