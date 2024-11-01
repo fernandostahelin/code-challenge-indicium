@@ -13,3 +13,5 @@
 /transform/logs/
 
 # custom
+.vscode
+airflow

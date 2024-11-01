@@ -17,6 +17,11 @@ I also opted to use Ruff instead of Flake8 for linting. Like uv, it was the firs
 
 I opted to use a docker compose file to run the databases. This way, I can easily run the project locally and also deploy it to the cloud if needed.
 
+## Notes
+Ideally, there would be a clear separation of concerns between orchestration and the EL process.
+
+I tried my best to separate the concerns between orchestration and the EL process, using containers to run databases, meltano and airflow.
+
 ## Architecture
 ![Pipeline](./pictures/code_challange_indicium.png)
 

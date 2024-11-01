@@ -9,7 +9,7 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy over Meltano project directory
-COPY . .
+COPY ./meltano .
 RUN meltano install
 
 # Don't allow changes to containerized project files

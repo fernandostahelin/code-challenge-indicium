@@ -11,28 +11,30 @@ plugins:
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
     config:
-      default_replication_method: INCREMENTAL
-      flattening_enabled: false
-      host: db-source
-      user: ${TAP_POSTGRES_USER}
-      password: ${TAP_POSTGRES_PASSWORD}
-      database: ${TAP_POSTGRES_DATABASE}
+      host: localhost
       port: 5432
+      user: ${POSTGRES_USER_SOURCE}
+      password: ${POSTGRES_PASSWORD_SOURCE}
+      database: ${POSTGRES_DB_SOURCE}
+      default_replication_method: FULL_TABLE
       filter_schemas: [public]
-    select:
-    - public-categories
-    - public-customer_customer_demo
-    - public-customer_demographics
-    - public-customers
-    - public-employees
-    - public-order_details
-    - public-orders
-    - public-products
-    - public-region
-    - public-shippers
-    - public-suppliers
-    - public-territories
-    - public-us_states
+      ssl: false
+      max_record_size: 1048576
+      data_flattening_max_depth: 0
+      select:
+      - public-categories
+      - public-customer_customer_demo
+      - public-customer_demographics
+      - public-customers
+      - public-employees
+      - public-order_details
+      - public-orders
+      - public-products
+      - public-region
+      - public-shippers
+      - public-suppliers
+      - public-territories
+      - public-us_states
   - name: tap-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
@@ -54,18 +56,20 @@ plugins:
     variant: meltanolabs
     pip_url: meltanolabs-target-postgres
     config:
-      add_record_metadata: true
-      load_method: upsert
-      user: ${TARGET_POSTGRES_USER}
-      password: ${TARGET_POSTGRES_PASSWORD}
-      database: ${TARGET_POSTGRES_DATABASE}
+      host: localhost
+      user: ${POSTGRES_USER_ANALYTICS}
+      password: ${POSTGRES_PASSWORD_ANALYTICS}
+      database: ${POSTGRES_DB_ANALYTICS}
+      port: 5433
   - name: target-parquet
     variant: automattic
     pip_url: git+https://github.com/Automattic/target-parquet.git
     config:
       add_record_metadata: true
-      destination_path: ./data
+      destination_path: ./data/postgres/{{stream}}/${EXECUTION_DATE}
       load_method: upsert
+      compression: snappy
+      coerce_timestamps: true
     extras:
     - numpy<2.0.0
     - pyarrow<15.0.0,>=14.0.1
